@@ -32,7 +32,7 @@ const Auth = () => {
   return (
 
     <div className="container d-flex justify-content-center align-items-center" 
-    style={{ minHeight: '90vh' }} dir="rtl">
+    style={{ minHeight: '90vh', fontFamily: 'kalibri'}} dir="rtl">
 
       <div className="card border-0 shadow-lg" 
       style={{ maxWidth: '450px', width: '100%', borderRadius: '25px' }}>
@@ -51,6 +51,7 @@ const Auth = () => {
             </p>
 
           </div>
+
 
           <form onSubmit={handleSubmit}>
 

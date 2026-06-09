@@ -45,6 +45,7 @@ const DoctorProfile = () => {
       time: selectedTime,
       date: '۱۴ خرداد ۱۴۰۵'
     };
+    
     localStorage.setItem('myAppointments', JSON.stringify([...appointments, newAppointment]));
     alert(`نوبت شما با موفقیت ثبت شد!`);
     navigate('/my-appointments');
@@ -56,7 +57,8 @@ const DoctorProfile = () => {
 
   return (
 
-    <div className="container py-5" dir="rtl">
+    <div className="container py-5" dir="rtl"
+    style={{fontFamily: 'kalibri'}}>
 
       <div className="row g-5">
 

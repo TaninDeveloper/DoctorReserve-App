@@ -17,7 +17,8 @@ const Home = () => {
 
   return (
 
-    <div className="container-fluid p-0" dir="rtl">
+    <div className="container-fluid p-0" dir="rtl"
+    style={{fontFamily: 'kalibri'}}>
       <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
         marginTop: '50px',
         marginBottom: '50px',

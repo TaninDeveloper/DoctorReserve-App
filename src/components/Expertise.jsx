@@ -14,10 +14,11 @@ const navigate = useNavigate();
 
   return (
     
-    <div className="container py-5" dir="rtl">
+    <div className="container py-5" dir="rtl"
+    style={{fontFamily: 'kalibri'}}>
       <div className="text-center mb-5">
-        <h2 style={{ fontWeight: '700', color: '#0a58ca', marginTop: '50px' }}>تخصص‌ های 
-            <span  style={{ color: '#0dcaf0' }}>پرطرفدار</span>
+        <h2 style={{ fontWeight: '700', color: '#0a58ca', marginTop: '50px' }}> تخصص‌ های 
+            <span  style={{ color: '#0dcaf0' }}> پرطرفدار </span>
         </h2>
 
         <p className="text-muted">سریع‌ترین راه برای پیدا کردن متخصص مورد نیاز شما</p>

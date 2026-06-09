@@ -46,10 +46,11 @@ const Doctors = () => {
   
   return (
 
-    <div className="container py-5" dir="rtl">
+    <div className="container py-5" dir="rtl"
+    style={{fontFamily: 'kalibri'}}>
 
       <h3 className="mb-5 fw-bold text-center"
-       style={{ color: '#0a58ca' }}>
+       style={{ color: '#0a58ca', marginTop: '40px' }}>
 
         {specialty ? `پزشکان متخصص ${specialty}` : 'لیست تمام پزشکان متخصص'}
 
@@ -61,7 +62,9 @@ const Doctors = () => {
           filteredDoctors.map((doc) => (
 
             <div className="col-12 col-sm-6 col-md-4 col-lg-3" 
+            style={{marginTop: '90px'}}
             key={doc.id}>
+              
               <div 
                 className="card h-100 border-0 shadow-sm overflow-hidden" 
                 style={{ borderRadius: '20px', cursor: 'pointer' }}
@@ -101,3 +104,5 @@ const Doctors = () => {
 };
 
 export default Doctors;
+
+

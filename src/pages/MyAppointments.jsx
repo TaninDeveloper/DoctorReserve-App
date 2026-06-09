@@ -18,7 +18,8 @@ const [appointments, setAppointments] = useState([]);
 
   return (
 
-    <div className="container py-5" dir="rtl">
+    <div className="container py-5" dir="rtl"
+    style={{fontFamily: 'kalibri'}}>
       <h3 className="fw-bold mb-5 text-center" 
       style={{ color: '#0a58ca' }}>نوبت‌های رزرو شده شما</h3>
       

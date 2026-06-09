@@ -19,10 +19,12 @@ const Navbar = () => {
 
   return (
 
-    <nav dir="rtl" style={{backgroundColor: '#fff',
+    <nav dir="rtl"
+      style={{backgroundColor: '#fff',
       boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
       position: 'sticky', top: 0, zIndex: 1000,
-      borderBottom: '3px solid #0dcaf0'}}>
+      borderBottom: '3px solid #0dcaf0',
+      fontFamily: 'kalibri'}}>
 
       <div style={{height: '75px', display: 'flex', alignItems: 'center', 
         justifyContent: 'space-between', padding: '0 5%'}}>
@@ -44,24 +46,24 @@ const Navbar = () => {
         </div>
 
         <div className="d-none d-md-flex"
-         style={{ flex: '2', justifyContent: 'center', alignItems: 'center', gap: '30px' }}>
+         style={{ flex: '2', justifyContent: 'center', alignItems: 'center', gap: '30px'}}>
          
-          <Link to="/" style={{ textDecoration: 'none', color: '#444', fontWeight: '600' }}>
+          <Link to="/" style={{ color: '#444', fontWeight: '600' }}>
           صفحه اصلی
           </Link>
 
           <Link to="/doctors" 
-          style={{ textDecoration: 'none', color: '#444', fontWeight: '600' }}>
+          style={{color: '#444', fontWeight: '600' }}>
             پزشکان
           </Link>
 
           <Link to="/my-appointments"
-           style={{ textDecoration: 'none', color: '#444', fontWeight: '600' }}>
+           style={{ color: '#444', fontWeight: '600' }}>
             نوبت‌ ها
            </Link>
 
           <Link to="/login" 
-          style={{ backgroundColor: '#0dcaf0', color: '#fff', padding: '8px 22px', borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem' }}>
+          style={{ backgroundColor: '#0dcaf0', color: '#fff', padding: '8px 22px', borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', textDecoration: 'none' }}>
             ورود / ثبت‌نام
           </Link>
 
@@ -75,7 +77,8 @@ const Navbar = () => {
             className="d-none d-sm-block">
 
             <input 
-              type="text" placeholder= "نام پزشک..." 
+              type="text"
+              placeholder= "نام پزشک..." 
               style={{ width: '160px', padding: '7px 35px 7px 12px', borderRadius: '50px', border: '1px solid #eee', backgroundColor: '#f8f9fa', fontSize: '0.8rem', outline: 'none' }}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}/>
@@ -89,7 +92,7 @@ const Navbar = () => {
           <div 
             onClick={() => setIsOpen(!isOpen)}
             style={{width: '30px', height: '20px', display: 'flex', flexDirection: 'column', 
-              justifyContent: 'space-between', cursor: 'pointer', zIndex: 1001}}
+            justifyContent: 'space-between', cursor: 'pointer', zIndex: 1001}}
             className="d-md-none">
 
             <div style={{ width: '100%', height: '3px', backgroundColor: '#0dcaf0', borderRadius: '3px', transition: '0.3s', transform: isOpen ? 'rotate(45deg) translate(5px, 6px)' : '' }}>
