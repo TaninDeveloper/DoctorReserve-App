@@ -14,10 +14,10 @@ const Doctors = () => {
     { id: 1, name: 'دکتر سارا احمدی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg' },
     { id: 2, name: 'دکتر محمود علوی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/doctor-with-co-workers-analyzing-x-ray_1098-581.jpg' },
     { id: 3, name: 'دکتر ناصر همتی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/portrait-smiling-handsome-male-doctor-man_171337-5055.jpg' },
-    { id: 4, name: 'دکتر رویا کریمی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/doctor-standing-with-folder-stethoscope_1291-16.jpg' },
+    { id: 4, name: 'دکتر رضا کریمی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/doctor-standing-with-folder-stethoscope_1291-16.jpg' },
     { id: 5, name: 'دکتر علی مرادی', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/smiling-doctor-with-stethoscope-isolated-grey_651396-974.jpg' },
     { id: 6, name: 'دکتر بابک نوری', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/handsome-young-male-doctor-with-stethoscope-standing-against-white-background_23-2148203957.jpg' },
-    { id: 7, name: 'دکتر مریم شمس', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/medium-shot-doctor-posing-with-arms-crossed_23-2148868114.jpg' },
+    { id: 7, name: 'دکتر محمد شمس', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/medium-shot-doctor-posing-with-arms-crossed_23-2148868114.jpg' },
     { id: 8, name: 'دکتر فریبا ناصری', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-with-stethoscope-around-neck-standing-with-folded-arms_409827-254.jpg' },
     { id: 9, name: 'دکتر الهام یزدانی', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/woman-doctor-wearing-white-coat-with-stethoscope-isolated_273609-15214.jpg' },
     { id: 10, name: 'دکتر مونا اکبری', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/confident-female-doctor-with-stethoscope-around-neck_1262-19796.jpg' },
@@ -47,7 +47,7 @@ const Doctors = () => {
   return (
 
     <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'kalibri'}}>
+    style={{fontFamily: 'Vazir'}}>
 
       <h3 className="mb-5 fw-bold text-center"
        style={{ color: '#0a58ca', marginTop: '40px' }}>

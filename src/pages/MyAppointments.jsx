@@ -19,7 +19,8 @@ const [appointments, setAppointments] = useState([]);
   return (
 
     <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'kalibri'}}>
+    style={{fontFamily: 'Vazir'}}>
+
       <h3 className="fw-bold mb-5 text-center" 
       style={{ color: '#0a58ca' }}>نوبت‌های رزرو شده شما</h3>
       
@@ -41,7 +42,8 @@ const [appointments, setAppointments] = useState([]);
 
                     <p className="text-primary mb-0 small">{item.specialty}</p>
 
-                    <span className="badge bg-light text-dark mt-2 p-2">📅 {item.date} | ⏰ ساعت {item.time}</span>
+                    <span className="badge bg-light text-dark mt-2 p-2">📅 
+                        {item.date} | ⏰ ساعت {item.time}</span>
 
                   </div>
 

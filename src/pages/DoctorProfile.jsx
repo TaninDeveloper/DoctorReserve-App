@@ -45,7 +45,7 @@ const DoctorProfile = () => {
       time: selectedTime,
       date: '۱۴ خرداد ۱۴۰۵'
     };
-    
+
     localStorage.setItem('myAppointments', JSON.stringify([...appointments, newAppointment]));
     alert(`نوبت شما با موفقیت ثبت شد!`);
     navigate('/my-appointments');
@@ -58,7 +58,7 @@ const DoctorProfile = () => {
   return (
 
     <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'kalibri'}}>
+    style={{fontFamily: 'Vazir'}}>
 
       <div className="row g-5">
 
@@ -94,13 +94,11 @@ const DoctorProfile = () => {
                   key={time} 
                   onClick={() => setSelectedTime(time)}
                   className={`px-4 py-2 rounded-pill transition-all`}
-                  style={{ 
-                    cursor: 'pointer', 
+                  style={{cursor: 'pointer', 
                     backgroundColor: selectedTime === time ? '#0a58ca' : 'white',
                     color: selectedTime === time ? 'white' : '#0a58ca',
                     border: '2px solid #0a58ca',
-                    fontWeight: '600'
-                  }}>
+                    fontWeight: '600'}}>
 
                   {time}
 

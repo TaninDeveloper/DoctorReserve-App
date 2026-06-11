@@ -12,10 +12,11 @@ const navigate = useNavigate();
     { id: 4, name: 'روانپزشکی', icon: '🧠', color: '#e8f5e9' },
   ];
 
+
   return (
     
     <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'kalibri'}}>
+    style={{fontFamily: 'Vazir'}}>
       <div className="text-center mb-5">
         <h2 style={{ fontWeight: '700', color: '#0a58ca', marginTop: '50px' }}> تخصص‌ های 
             <span  style={{ color: '#0dcaf0' }}> پرطرفدار </span>

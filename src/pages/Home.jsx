@@ -18,7 +18,7 @@ const Home = () => {
   return (
 
     <div className="container-fluid p-0" dir="rtl"
-    style={{fontFamily: 'kalibri'}}>
+    style={{fontFamily: 'Vazir'}}>
       <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
         marginTop: '50px',
         marginBottom: '50px',
@@ -35,7 +35,7 @@ const Home = () => {
 
               <h1 style={{ fontWeight: '800', color: '#0a58ca', fontSize: 'calc(1.8rem + 1vw)', lineHeight: '1.3', margin: 0 }}>
                 سلامتی شما، <br />
-                <span style={{ color: '#0dcaf0' }}>اولویت اول ماست.</span>
+                  <span style={{ color: '#0dcaf0' }}>اولویت اول ماست.</span>
               </h1>
 
               <div className="d-lg-none mt-2" 

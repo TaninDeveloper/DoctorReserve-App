@@ -24,7 +24,7 @@ const Navbar = () => {
       boxShadow: '0 2px 15px rgba(0,0,0,0.08)',
       position: 'sticky', top: 0, zIndex: 1000,
       borderBottom: '3px solid #0dcaf0',
-      fontFamily: 'kalibri'}}>
+      fontFamily: 'Vazir'}}>
 
       <div style={{height: '75px', display: 'flex', alignItems: 'center', 
         justifyContent: 'space-between', padding: '0 5%'}}>
@@ -33,11 +33,13 @@ const Navbar = () => {
 
           <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
 
-            <div style={{ width: '35px', height: '35px', backgroundColor: '#0dcaf0', borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff' }}>
+            <div className='brand' 
+            style={{ width: '35px', height: '35px', backgroundColor: '#0dcaf0', borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#fff' }}>
                 🩺
             </div>
 
-            <span style={{ marginRight: '10px', fontWeight: '800', color: '#0a58ca', fontSize: '1.2rem', whiteSpace: 'nowrap' }}>
+            <span className='brand'
+             style={{ marginRight: '10px', fontWeight: '800', color: '#0a58ca', fontSize: '1.2rem', whiteSpace: 'nowrap' }}>
                 دکتر-رزرو
             </span>
 
@@ -48,21 +50,26 @@ const Navbar = () => {
         <div className="d-none d-md-flex"
          style={{ flex: '2', justifyContent: 'center', alignItems: 'center', gap: '30px'}}>
          
-          <Link to="/" style={{ color: '#444', fontWeight: '600' }}>
+          <Link className='linkk' 
+          to="/" 
+          style={{ color: '#444', fontWeight: '600' }}>
           صفحه اصلی
           </Link>
 
-          <Link to="/doctors" 
+          <Link className='linkk'
+           to="/doctors" 
           style={{color: '#444', fontWeight: '600' }}>
             پزشکان
           </Link>
 
-          <Link to="/my-appointments"
+          <Link className='linkk'
+           to="/my-appointments"
            style={{ color: '#444', fontWeight: '600' }}>
             نوبت‌ ها
            </Link>
 
-          <Link to="/login" 
+          <Link className='linkk'
+           to="/login" 
           style={{ backgroundColor: '#0dcaf0', color: '#fff', padding: '8px 22px', borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold', fontSize: '0.9rem', textDecoration: 'none' }}>
             ورود / ثبت‌نام
           </Link>

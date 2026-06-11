@@ -32,7 +32,7 @@ const Auth = () => {
   return (
 
     <div className="container d-flex justify-content-center align-items-center" 
-    style={{ minHeight: '90vh', fontFamily: 'kalibri'}} dir="rtl">
+    style={{ minHeight: '90vh', fontFamily: 'Vazir'}} dir="rtl">
 
       <div className="card border-0 shadow-lg" 
       style={{ maxWidth: '450px', width: '100%', borderRadius: '25px' }}>
@@ -114,7 +114,7 @@ const Auth = () => {
 
               {isLogin ? 'حساب کاربری ندارید؟' : 'قبلاً ثبت‌نام کرده‌اید؟'}
 
-              <span 
+              <span className='sighn'
                 onClick={() => setIsLogin(!isLogin)} 
                 style={{ color: '#0dcaf0', cursor: 'pointer', fontWeight: '600', marginRight: '5px' }}>
                 {isLogin ? 'همین حالا ثبت‌نام کنید' : 'وارد شوید'}
