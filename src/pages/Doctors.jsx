@@ -1,14 +1,14 @@
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom'; 
+import { motion } from 'framer-motion'; 
 
 const Doctors = () => {
 
-  const { specialty } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation(); 
-
-  const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const specialtyParam = params.get('specialty');
+  const searchParam = params.get('search');
 
   const allDoctors = [
     { id: 1, name: 'دکتر سارا احمدی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg' },
@@ -19,7 +19,6 @@ const Doctors = () => {
     { id: 6, name: 'دکتر بابک نوری', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/handsome-young-male-doctor-with-stethoscope-standing-against-white-background_23-2148203957.jpg' },
     { id: 7, name: 'دکتر محمد شمس', specialty: 'ارتوپد', image: 'https://img.freepik.com/free-photo/medium-shot-doctor-posing-with-arms-crossed_23-2148868114.jpg' },
     { id: 8, name: 'دکتر فریبا ناصری', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-with-stethoscope-around-neck-standing-with-folded-arms_409827-254.jpg' },
-    { id: 9, name: 'دکتر الهام یزدانی', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/woman-doctor-wearing-white-coat-with-stethoscope-isolated_273609-15214.jpg' },
     { id: 10, name: 'دکتر مونا اکبری', specialty: 'مخصوص زنان', image: 'https://img.freepik.com/free-photo/confident-female-doctor-with-stethoscope-around-neck_1262-19796.jpg' },
     { id: 11, name: 'دکتر رضا رضایی', specialty: 'روانپزشکی', image: 'https://img.freepik.com/free-photo/male-doctor-hospital-suit_23-2148827725.jpg' },
     { id: 12, name: 'دکتر کامران پارسا', specialty: 'روانپزشکی', image: 'https://img.freepik.com/free-photo/smiling-young-doctor-white-coat-standing-with-arms-folded_171337-14981.jpg' },
@@ -28,74 +27,81 @@ const Doctors = () => {
     { id: 15, name: 'دکتر ژاله صادقی', specialty: 'روانپزشکی', image: 'https://img.freepik.com/free-photo/nurse-hospital-with-stethoscope_23-2148827711.jpg' },
   ];
 
+  const filteredDoctors = allDoctors.filter(doctor => {
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const q = params.get('search');
-    if (q) setSearchQuery(q);
-  }, [location]);
-
-
-  const filteredDoctors = allDoctors.filter(doc => {
-    const matchesSpecialty = specialty ? doc.specialty === specialty : true;
-    const matchesSearch = searchQuery ? 
-    (doc.name.includes(searchQuery) || doc.specialty.includes(searchQuery)) : true;
+    const matchesSpecialty = specialtyParam ? doctor.specialty === specialtyParam : true;
+    const matchesSearch = searchParam ? (doctor.name.includes(searchParam) || doctor.specialty.includes(searchParam)) : true;
     return matchesSpecialty && matchesSearch;
   });
 
-  
   return (
 
-    <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'Vazir'}}>
+    <div className="container py-5" dir="rtl" 
+    style={{ fontFamily: 'Vazir', marginTop: '30px' }}>
 
-      <h3 className="mb-5 fw-bold text-center"
-       style={{ color: '#0a58ca', marginTop: '40px' }}>
-
-        {specialty ? `پزشکان متخصص ${specialty}` : 'لیست تمام پزشکان متخصص'}
-
-      </h3>
+      <motion.h2 
+        initial={{ opacity: 0, y: -20 }} 
+        animate={{ opacity: 1, y: 0 }}    
+        className="text-center fw-bold mb-5">
+        {specialtyParam ? `متخصصین ${specialtyParam}` : 'لیست پزشکان متخصص'}
+      </motion.h2>
 
       <div className="row g-4">
+        {filteredDoctors.map((doctor, index) => (
 
-        {filteredDoctors.length > 0 ? (
-          filteredDoctors.map((doc) => (
+          <div key={doctor.id} 
+          className="col-md-4 col-lg-3" 
+          style={{marginTop: '90px'}}>
 
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3" 
-            style={{marginTop: '90px'}}
-            key={doc.id}>
-              
-              <div 
-                className="card h-100 border-0 shadow-sm overflow-hidden" 
-                style={{ borderRadius: '20px', cursor: 'pointer' }}
-                onClick={() => navigate(`/doctor/${doc.id}`)} >
+            <motion.div
+              initial={{ opacity: 0, y: 30 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: index * 0.1 }} 
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}>
 
-                <img src={doc.image}
-                 className="card-img-top" 
-                 alt={doc.name} 
-                 style={{ height: '250px', objectFit: 'cover' }} />
+              <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden text-center">
 
-                <div className="card-body text-center">
+                <img 
+                  src={doctor.image} 
+                  className="card-img-top" 
+                  alt={doctor.name} 
+                  style={{ height: '250px', objectFit: 'cover' }}/>
 
-                  <h6 className="fw-bold">{doc.name}</h6>
+                <div className="card-body">
 
-                  <p className="text-primary small">{doc.specialty}</p>
+                  <h5 className="fw-bold">
+                    {doctor.name}
+                  </h5>
 
-                  <button className="btn btn-primary btn-sm w-100 rounded-pill mt-2" 
-                  style={{backgroundColor: '#0a58ca', border: 'none'}}>
-                    رزرو نوبت
-                  </button>
+                  <p className="text-primary">
+                    {doctor.specialty}
+                  </p>
+
+                  <Link to={`/doctor/${doctor.id}`} 
+                  className="btn btn-outline-primary rounded-pill w-100">
+                    مشاهده پروفایل
+                  </Link>
 
                 </div>
-              </div>
-            </div>
-          ))
-        ) : (
 
+              </div>
+
+            </motion.div>
+
+          </div>
+        ))}
+
+        {filteredDoctors.length === 0 && (
           <div className="text-center py-5">
 
-            <p className="text-muted">پزشکی با این مشخصات یافت نشد. 🔍</p>
+             <p className="text-muted">پزشکی با این مشخصات یافت نشد.</p>
 
+             <Link to="/doctors" 
+             className="btn btn-link">
+              نمایش همه پزشکان
+             </Link>
+             
           </div>
         )}
       </div>
@@ -104,5 +110,3 @@ const Doctors = () => {
 };
 
 export default Doctors;
-
-

@@ -1,13 +1,19 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DoctorProfile = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = useState(null);
+  const [bookedTimes, setBookedTimes] = useState([]);
 
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [rating, setRating] = useState(5);
 
   const allDoctors = [
     { id: 1, name: 'دکتر سارا احمدی', specialty: 'قلب و عروق', image: 'https://img.freepik.com/free-photo/female-doctor-hospital-with-stethoscope_23-2148827715.jpg', bio: 'متخصص قلب و عروق با سابقه جراحی‌های موفق.' },
@@ -29,90 +35,249 @@ const DoctorProfile = () => {
 
   const doctor = allDoctors.find(doc => doc.id === parseInt(id));
 
-  const availableTimes = ['۰۹:۰۰', '۱۰:۳۰', '۱۲:۰۰', '۱۴:۳۰', '۱۶:۰۰', '۱۸:۳۰'];
+  const availableTimes = [
+    { time: '۰۹:۰۰', capacity: 3 },
+    { time: '۱۰:۳۰', capacity: 1 },
+    { time: '۱۲:۰۰', capacity: 5 },
+    { time: '۱۴:۳۰', capacity: 0 },
+    { time: '۱۶:۰۰', capacity: 4 },
+    { time: '۱۸:۳۰', capacity: 2 }
+  ];
+
+  useEffect(() => {
+    if (doctor) {
+      const appointments = JSON.parse(localStorage.getItem('myAppointments') || '[]');
+      const doctorBookedTimes = appointments
+        .filter(app => app.doctorName === doctor.name)
+        .map(app => app.time);
+      setBookedTimes(doctorBookedTimes);
+
+      const allComments = JSON.parse(localStorage.getItem(`comments_${id}`) || '[]');
+      setComments(allComments);
+    }
+  }, [id]);
 
   const handleBooking = () => {
     if (!selectedTime) {
-      alert('لطفاً ابتدا یک ساعت را انتخاب کنید!');
+      toast.error('لطفاً ابتدا یک زمان را انتخاب کنید.');
       return;
     }
 
-    const appointments = JSON.parse(localStorage.getItem('myAppointments') || '[]');
+    const userData = localStorage.getItem('user');
+    if (!userData) {
+      toast.error('برای رزرو نوبت ابتدا باید وارد حساب خود شوید');
+      return;
+    }
+
     const newAppointment = {
       id: Date.now(),
       doctorName: doctor.name,
       specialty: doctor.specialty,
       time: selectedTime,
-      date: '۱۴ خرداد ۱۴۰۵'
+      date: '۱۴۰۳/۰۳/۱۴'
     };
 
-    localStorage.setItem('myAppointments', JSON.stringify([...appointments, newAppointment]));
-    alert(`نوبت شما با موفقیت ثبت شد!`);
-    navigate('/my-appointments');
+    const existingAppointments = JSON.parse(localStorage.getItem('myAppointments') || '[]');
+    localStorage.setItem('myAppointments', JSON.stringify([...existingAppointments, newAppointment]));
+
+    toast.success(`نوبت شما با ${doctor.name} ثبت شد.`);
+
+    setTimeout(() => {
+      navigate('/my-appointments');
+    }, 1500);
   };
 
-  if (!doctor)
-     return <div className="text-center py-5">پزشک مورد نظر یافت نشد!</div>;
+  const submitComment = () => {
+    if (newComment.trim().length < 5) {
+      toast.error('لطفاً نظر کامل‌تری بنویسید');
+      return;
+    }
 
+    const commentObj = {
+      id: Date.now(),
+      text: newComment,
+      rating: rating,
+      date: new Date().toLocaleDateString('fa-IR')
+    };
+
+    const updatedComments = [commentObj, ...comments];
+
+    setComments(updatedComments);
+    localStorage.setItem(`comments_${id}`, JSON.stringify(updatedComments));
+    setNewComment('');
+    toast.success('نظر شما ثبت شد');
+  };
+
+  if (!doctor) return <div className="text-center py-5">پزشک مورد نظر یافت نشد.</div>;
 
   return (
 
-    <div className="container py-5" dir="rtl"
-    style={{fontFamily: 'Vazir'}}>
+    <div className="container py-5" dir="rtl" 
+    style={{ fontFamily: 'Vazir', marginTop: '60px' }}>
 
-      <div className="row g-5">
+      <div className="row g-4">
 
-        <div className="col-lg-4 text-center">
+        <div className="col-lg-4">
 
-          <img src={doctor.image} 
-          className="img-fluid rounded-4 shadow" 
-          alt={doctor.name} 
-          style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
+          <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
 
-          <h3 className="fw-bold mt-4" 
-          style={{ color: '#0a58ca' }}>
-            {doctor.name}</h3>
+            <img 
+            src={doctor.image} 
+            alt={doctor.name} 
+            className="card-img-top" 
+            style={{ height: '350px', objectFit: 'cover' }} />
 
-          <p className="text-primary fw-semibold">{doctor.specialty}</p>
+            <div className="card-body text-center">
 
-          <div className="p-3 bg-light rounded-4 text-muted small">{doctor.bio}</div>
+              <h4 className="fw-bold text-primary">
+                {doctor.name}
+              </h4>
+
+              <span className="badge bg-info-subtle text-info px-3 py-2 rounded-pill">
+                {doctor.specialty}
+              </span>
+
+            </div>
+
+          </div>
 
         </div>
 
         <div className="col-lg-8">
 
-          <div className="card border-0 shadow-sm p-4 p-md-5" 
-          style={{ borderRadius: '30px' }}>
+          <div className="bg-white p-4 p-md-5 rounded-4 shadow-sm border mb-4">
 
-            <h4 className="fw-bold mb-4 text-end">رزرو نوبت آنلاین</h4>
+            <h5 className="fw-bold mb-4 border-right border-4 border-info pr-3">
+              درباره پزشک
+            </h5>
 
-            <div className="d-flex flex-wrap gap-3 justify-content-end mb-5">
+            <p className="text-secondary leading-relaxed mb-5">
+              {doctor.bio}
+            </p>
 
-              {availableTimes.map(time => (
+            <h5 className="fw-bold mb-4">
+              انتخاب زمان نوبت (امروز)
+            </h5>
 
-                <div 
-                  key={time} 
-                  onClick={() => setSelectedTime(time)}
-                  className={`px-4 py-2 rounded-pill transition-all`}
-                  style={{cursor: 'pointer', 
-                    backgroundColor: selectedTime === time ? '#0a58ca' : 'white',
-                    color: selectedTime === time ? 'white' : '#0a58ca',
-                    border: '2px solid #0a58ca',
-                    fontWeight: '600'}}>
+            <div className="d-flex flex-wrap gap-3 mb-5">
+              {availableTimes.map((slot) => {
+                const isBooked = bookedTimes.includes(slot.time) || slot.capacity === 0;
+                const isSelected = selectedTime === slot.time;
 
-                  {time}
+                return (
 
-                </div>
-              ))}
+                  <motion.button
+                    key={slot.time}
+                    whileHover={!isBooked ? { scale: 1.05 } : {}}
+                    whileTap={!isBooked ? { scale: 0.95 } : {}}
+                    onClick={() => !isBooked && setSelectedTime(slot.time)}
+                    disabled={isBooked}
+                    className={`btn py-3 px-4 rounded-4 flex-grow-1 border-2 transition-all ${
+                      isSelected ? 'btn-info text-white border-info' : 
+                      isBooked ? 'btn-light text-muted border-transparent' : 'btn-outline-info'
+                    }`}
+                    style={{ minWidth: '140px', cursor: isBooked ? 'not-allowed' : 'pointer' }}>
+
+                    <div className="fw-bold fs-5">
+                      {slot.time}
+                    </div>
+
+                    <div style={{ fontSize: '0.75rem', marginTop: '4px' }}>
+                      {isBooked ? '🔴 تکمیل' : `🟢 ${slot.capacity} ظرفیت`}
+                    </div>
+
+                  </motion.button>
+                );
+              })}
+
             </div>
 
-            <button onClick={handleBooking}
-             className="btn btn-primary w-100 py-3 rounded-pill fw-bold" 
-             style={{ backgroundColor: '#0a58ca', border: 'none' }}>
-                تایید و ثبت نوبت
-             </button>
-             
+            <button 
+              onClick={handleBooking}
+              className="btn btn-primary btn-lg w-100 rounded-pill fw-bold py-3 shadow-sm transition-all"
+              style={{ letterSpacing: '0.5px' }}>
+              تایید و رزرو نوبت نهایی
+            </button>
+
           </div>
+
+          <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }} 
+          className="bg-white p-4 p-md-5 rounded-4 shadow-sm border mt-4">
+
+            <h5 className="fw-bold mb-4">
+              نظرات مراجعین
+            </h5>
+            
+            <div className="bg-light p-3 rounded-4 mb-5">
+
+              <div className="mb-3">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span 
+                    key={star} 
+                    onClick={() => setRating(star)}
+                    style={{ cursor: 'pointer', fontSize: '24px', color: star <= rating ? '#ffc107' : '#ccc' }}>
+                    ★
+                  </span>
+
+                ))}
+
+              </div>
+
+              <textarea 
+                className="form-control border-0 rounded-4 p-3 shadow-sm mb-3" 
+                rows="3" 
+                placeholder="تجربه خود را بنویسید..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}>
+                </textarea>
+
+              <button 
+              onClick={submitComment} 
+              className="btn btn-info text-white rounded-pill px-4 fw-bold">
+                ثبت نظر
+              </button>
+
+            </div>
+
+            <div className="comments-list">
+              <AnimatePresence>
+                {comments.length > 0 ? comments.map((c) => (
+                  <motion.div 
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }} key={c.id} 
+                  className="border-bottom pb-3 mb-3">
+
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+
+                      <div style={{ color: '#ffc107' }}>
+                        {'★'.repeat(c.rating)}{'☆'.repeat(5-c.rating)}
+                      </div>
+
+                      <small className="text-muted">
+                        {c.date}
+                      </small>
+
+                    </div>
+
+                    <p className="mb-0 text-dark small">
+                      {c.text}
+                    </p>
+
+                  </motion.div>
+                )) : (
+                  <p className="text-center text-muted">
+                    هنوز نظری ثبت نشده است.
+                  </p>
+                )}
+
+              </AnimatePresence>
+
+            </div>
+
+          </motion.div>
+          
         </div>
       </div>
     </div>
@@ -120,3 +285,8 @@ const DoctorProfile = () => {
 };
 
 export default DoctorProfile;
+
+
+
+
+
