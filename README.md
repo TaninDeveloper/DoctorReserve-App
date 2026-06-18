@@ -1,16 +1,32 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 🩺 Doctor Appointment Reservation System
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+A professional healthcare platform designed to simplify the process of booking medical appointments. This project aims to bridge the gap between patients and doctors through an efficient scheduling system and a polished user interface.
 
-## React Compiler
+✨ Key Features
+- Secure Authentication: Integrated Login and Sign-up system. Access to appointment booking is strictly protected, requiring user authentication to ensure data security.
+- Doctor Profiles: Search and filter doctors by specialty and experience.
+- Smart Scheduling: Real-time appointment booking and time-slot management.
+- Patient Dashboard: Easy access to upcoming and past appointments.
+- Interactive UI/UX: Enhanced visual experience with custom CSS animations, including a dynamic pulsing heart and smooth entrance transitions for content cards.
+- Responsive Design: Fully optimized for desktop, tablet, and mobile devices.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🛠️ Tech Stack
+- Frontend: React.js
+- Styling: CSS / Bootstrap
+- State Management: React Hooks (useState, useEffect)
+- Routing: React Router DOM
 
-## Expanding the ESLint configuration
+🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone the repository:
+   git clone https://github.com/TaninDeveloper/DoctorReserve-App.git
+   
+2. Install dependencies:
+   npm install
+   
+3. Run the project:
+   npm start
+   
+Developed with ❤️ by TaninDeveloper
